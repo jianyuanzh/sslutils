@@ -21,24 +21,22 @@ public class ListClientCiphers {
         TreeMap<String, Boolean> ciphers = new TreeMap<String, Boolean>();
 
         // all supported ciphers
-        for (int i = 0; i < availableCiphers.length; i++) {
-            ciphers.put(availableCiphers[i], Boolean.FALSE);
+        for (String availableCipher : availableCiphers) {
+            ciphers.put(availableCipher, Boolean.FALSE);
         }
 
         // all enabled ciphers
-        for (int i=0; i< defaultCiphers.length; i++) {
-            ciphers.put(defaultCiphers[i], Boolean.TRUE);
+        for (String defaultCipher : defaultCiphers) {
+            ciphers.put(defaultCipher, Boolean.TRUE);
         }
 
 
-        for (Iterator i = ciphers.entrySet().iterator(); i.hasNext(); ) {
-            Map.Entry cipher = (Map.Entry) i.next();
-            boolean enabled = Boolean.TRUE.equals(cipher.getValue());
+        for (Map.Entry<String, Boolean> stringBooleanEntry : ciphers.entrySet()) {
+            boolean enabled = Boolean.TRUE.equals(((Map.Entry) stringBooleanEntry).getValue());
             if (!enabled && showAll) {
-                System.out.println("-" + cipher.getKey() );
-            }
-            else {
-                System.out.println("*" + cipher.getKey());
+                System.out.println("-" + ((Map.Entry) stringBooleanEntry).getKey());
+            } else {
+                System.out.println("*" + ((Map.Entry) stringBooleanEntry).getKey());
             }
         }
 
